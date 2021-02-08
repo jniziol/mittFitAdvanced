@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>  
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="data.js"></script>
+  <script src="app.js" defer></script>
+  <title>MITTFit</title>
+</head>
+<body>
+  <main>
+    <form>
+      <input type="text" placeholder="Description of activity" id="description-input">
+      <input type="text" placeholder="Location" id="location-input">
+      <input type="number" placeholder="Length of Time" id="time-input">
+      <select type="number" placeholder="Intensity" id="intensity-input">
+        <option value="">Intensity</option>
+        <option value="1">Very Light</option>
+        <option value="4">Light</option>
+        <option value="8">Moderate</option>
+        <option value="11">Heavy</option>
+        <option value="14">Max Effort</option>
+      </select>
+      <button>Submit</button>
+    </form>
+    <ul class="totals">
+      <li class="section-box" id="activities-total">
+        <i class="las la-running green"></i>
+        <div>
+          <h3>0</h3>
+          Activities
+        </div>        
+      </li>
+      <li class="section-box" id="time-total">
+        <i class="las la-stopwatch yellow"></i>
+        <div>
+          <h3>0hrs. 0mins.</h3>
+          Total time
+        </div>
+      </li>
+      <li class="section-box" id="average-calories-total">
+        <i class="las la-fire blue"></i>
+        <div>
+          <h3>0</h3>
+          Average calories
+        </div>
+        
+      </li>
+      <li class="section-box" id="calories-total">
+        <i class="las la-fire-alt red"></i>
+        <div>
+          <h3>0</h3>
+          Total calories
+        </div>
+      </li>
+    </ul>
+
+    <div class="chart-container" style="position: relative; height:300px; width:100%">
+      <canvas id="myChart"></canvas>
+    </div>
+
+    <section class="activities section-box">
+      <h2>Activity Entries</h2>
+      <table>
+        <thead>
+          <tr class="activity-header">
+            <th data-sort-category="description" data-sort-order="desc">Description</th>
+            <th data-sort-category="location" data-sort-order="desc">Location</th>
+            <th data-sort-category="calories" data-sort-order="desc">Calories</th>
+            <th data-sort-category="time" data-sort-order="desc">Time</th>
+            <th data-sort-category="date" data-sort-order="desc">Date</th>
+          </tr> 
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,170 @@
+:root {
+  --main-bg-color: #bad9765e;
+  --main-gap: 30px
+}
+
+html {
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  max-width: 1280px;
+  margin: 0 auto;
+  background-color: var(--main-bg-color);
+  padding: var(--main-gap); 
+}
+
+main {   
+  display: grid;
+  row-gap: var(--main-gap);
+}
+
+/* UTILITY */
+
+.section-box {
+  border-radius: 2px;
+  background-color: white;
+  padding: var(--main-gap);
+}
+
+/* FORM */
+
+form {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+  column-gap: var(--main-gap);
+}
+
+input,
+select {
+  margin: 0;
+  font-size: 20px;
+  border: 0;
+  border-radius: 2px;
+  padding: 15px;
+}
+
+button {
+  background-color: #008100;
+  border: 0;
+  border-radius: 2px;
+  color: #ffffff;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+th i {
+  padding-left: 5px;
+}
+
+th {
+  cursor: pointer;
+}
+
+
+/* TOTALS */
+
+.totals {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: var(--main-gap);
+}
+
+.totals li {
+  display: flex;
+  column-gap: var(--main-gap);
+}
+
+.totals i {
+  line-height: 40px;
+  width: 40px;
+  text-align: center;
+  font-size: 1.6rem;
+  border-radius: 2px;
+}
+
+.totals i.green {
+  background-color: #daeab5;
+  color: #008100;
+}
+
+.totals i.yellow {
+  background-color:#fff6b5;
+  color: #8b7a00;
+}
+
+.totals i.blue {
+  background-color:#becbfa;
+  color: #1400b7;
+}
+
+.totals i.red {
+  background-color: #fabebe;
+  color: #a50000;
+}
+
+.totals div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: grey;
+  font-size: 0.8rem;
+}
+
+.totals h3 {
+  font-size: 1.1rem;
+  color: black;
+  font-weight: 700;
+}
+
+/* ACTIVITIES */
+
+.activities h2 {
+  font-size: 25px;
+  margin-bottom: 15px;
+  padding-left: 5px;
+}
+
+table {
+  width: 100%;
+}
+
+tbody tr:nth-child(even) {
+   background-color: rgb(236, 236, 236);
+}
+
+th {
+  text-align: left;
+}
+
+td, th {
+  padding: 15px 5px;
+}
+
+td.description, 
+td.location {
+  width: 26%;
+}
+
+td.date,
+td.time,
+td.calories {
+  width: 15%;
+}
+
+td.close i{
+  color: red;
+  font-size: 30px;
+  cursor: pointer;
+  visibility: hidden;
+}
+
+tr:hover .close i {
+  visibility: visible;
+}
+
+canvas {
+  height: 200px;
+ 
+}
+
