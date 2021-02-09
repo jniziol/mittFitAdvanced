@@ -10,16 +10,16 @@
   <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="style.css">
   <script src="data.js"></script>
+  <script src="validations.js" defer></script>
   <script src="app.js" defer></script>
   <title>MITTFit</title>
 </head>
 <body>
   <main>
-    <form>
-      <input type="text" placeholder="Description of activity" id="description-input">
-      <input type="text" placeholder="Location" id="location-input">
-      <input type="number" placeholder="Length of Time" id="time-input">
-      <select type="number" placeholder="Intensity" id="intensity-input">
+    <form novalidate>
+      <input type="text" placeholder="Description of activity" id="description-input" required>
+      <input type="number" placeholder="Length of Time" id="time-input" required>
+      <select type="number" placeholder="Intensity" id="intensity-input" required>
         <option value="">Intensity</option>
         <option value="1">Very Light</option>
         <option value="4">Light</option>
@@ -71,7 +71,6 @@
         <thead>
           <tr class="activity-header">
             <th data-sort-category="description" data-sort-order="desc">Description</th>
-            <th data-sort-category="location" data-sort-order="desc">Location</th>
             <th data-sort-category="calories" data-sort-order="desc">Calories</th>
             <th data-sort-category="time" data-sort-order="desc">Time</th>
             <th data-sort-category="date" data-sort-order="desc">Date</th>

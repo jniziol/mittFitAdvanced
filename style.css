@@ -31,7 +31,7 @@ main {
 
 form {
   display: grid;
-  grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 3fr 1fr 1fr 1fr;
   column-gap: var(--main-gap);
 }
 
@@ -42,6 +42,15 @@ select {
   border: 0;
   border-radius: 2px;
   padding: 15px;
+}
+
+input.error, 
+select.error {
+  border: 1px solid red;
+}
+
+div.error {
+  color: red;
 }
 
 button {
@@ -142,17 +151,16 @@ td, th {
 }
 
 td.description, 
-td.location {
-  width: 26%;
+td.calories {
+  width: 30%;
 }
 
 td.date,
-td.time,
-td.calories {
-  width: 15%;
+td.time {
+  width: 20%;
 }
 
-td.close i{
+td.close i {
   color: red;
   font-size: 30px;
   cursor: pointer;
@@ -165,6 +173,5 @@ tr:hover .close i {
 
 canvas {
   height: 200px;
- 
 }
 
