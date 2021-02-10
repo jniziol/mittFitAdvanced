@@ -64,9 +64,11 @@ class Activity {
       Activity.id++,
     );
     
-    localStorage.setItem('activities', JSON.stringify([...ActivityTracker.getAllActivities(), activity]));  
+    localStorage.setItem('activities', JSON.stringify([...activityTracker.activities, activity]));  
     return activity;
   }
+  
+
 
   constructor(description, time, intensity, person, date, id) {
     this.description = description;
@@ -123,6 +125,8 @@ class ActivityTracker {
   removeActivity(id) {
     const activityIndex = this.activities.findIndex((activity) => id == activity.id);
     this.activities.splice(activityIndex, 1);
+    localStorage.setItem('activities', JSON.stringify([...this.activities]));
+    updateChartData();
     this.redraw();
   }
 
