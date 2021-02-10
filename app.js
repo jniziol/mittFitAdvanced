@@ -52,14 +52,30 @@ function formatTime(minutes) {
 }
 
 class Activity {
-  constructor(description, time, intensity, person, id, date) {
+  static id = 0;
+
+  static create(description, time, intensity, person) {
+    const activity = new Activity(
+      description,
+      time,
+      intensity,
+      person,
+      new Date(),
+      Activity.id++,
+    );
+    
+    localStorage.setItem('activities', JSON.stringify([...ActivityTracker.getAllActivities(), activity]));  
+    return activity;
+  }
+
+  constructor(description, time, intensity, person, date, id) {
     this.description = description;
     this.time = time;
     this.intensity = intensity;
-    this.id = id;
     this.person = person;
     this.date = date;
-    this.calories = ((this.intensity * this.person.weight) / 60) * this.time;
+    this.id = id;
+    this.calories = ((this.intensity * person.weight) / 60) * this.time;
   }
 
   formattedTime() {
@@ -72,40 +88,32 @@ class Activity {
 }
 
 class ActivityTracker {
-  constructor(person) {
-    this.person = person;
-    this.activities = [];
-    this.id = 0;
+  static getAllActivities() {
+    const activitiesJSON = JSON.parse(localStorage.getItem('activities')) || []; 
 
-    for(const activity of data) {
-      this.activities.push(
-        new Activity(
-          activity.description,
-          activity.time,
-          activity.intensity,
-          this.person,
-          this.id++,
-          activity.date,
-        )
+    const activities = activitiesJSON.map((activity) => {
+      return new Activity(
+        activity.description,
+        activity.time,
+        activity.intensity,
+        activity.person,
+        new Date(activity.date),
+        activity.id,
       );
-    };
+    });   
 
-    this.redraw();
-    
+    return activities
   }
 
-  addActivity(description, time, intensity, date = new Date()) {
-    this.activities.push(
-      new Activity(
-        description,
-        time,
-        intensity,
-        this.person,
-        this.id++,
-        date,
-      )
-    );
+  constructor(person) {
+    this.person = person;
+    this.activities = ActivityTracker.getAllActivities();   
+    this.redraw();
+  }
 
+  addActivity(description, time, intensity) {
+    this.activities.push(Activity.create(description, time, intensity, this.person));
+    
     this.sortBy('date', 'desc');
     updateChartData();
     this.redraw();
@@ -153,6 +161,7 @@ class ActivityTracker {
   }
 
   sortBy(field, direction = 'asc') {
+    console.log(this.activities);
     this.activities.sort((a, b) => {
       if (a[field] !== '' && b[field] !== '' && !isNaN(a[field]) && !isNaN(b[field])) {
         return direction === 'asc' ? a[field] - b[field] :  b[field] - a[field];
@@ -192,9 +201,6 @@ class Person {
 
 const john = new Person("John", 86, 190, 40);
 const activityTracker = new ActivityTracker(john);
-
-
-
 
 const recentActivities = activityTracker.sortBy('date', 'asc').activities.slice(activityTracker.activities.length - 5, activityTracker.activities.length)
 
