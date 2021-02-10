@@ -107,7 +107,8 @@ class ActivityTracker {
 
   constructor(person) {
     this.person = person;
-    this.activities = ActivityTracker.getAllActivities();   
+    this.activities = ActivityTracker.getAllActivities();
+    this.sortBy('date', 'desc'); 
     this.redraw();
   }
 
@@ -170,7 +171,7 @@ class ActivityTracker {
       }
     });
 
-    return this;
+    return this.activities;
   }
 
   redrawTable() {
@@ -202,7 +203,9 @@ class Person {
 const john = new Person("John", 86, 190, 40);
 const activityTracker = new ActivityTracker(john);
 
-const recentActivities = activityTracker.sortBy('date', 'asc').activities.slice(activityTracker.activities.length - 5, activityTracker.activities.length)
+const recentActivities = activityTracker.sortBy('date', 'desc').slice(0, 5);
+
+console.log(recentActivities)
 
 const ctx = document.getElementById('myChart').getContext('2d');
 const myChart = new Chart(ctx, {
@@ -252,7 +255,7 @@ function updateChartData() {
   const recentActivities = activityTracker.activities.slice(0, 5);
 
   myChart.data.labels = recentActivities.map(activity => activity.description);
-  myChart.data.datasets.data = recentActivities.map(activity => Math.round(activity.calories));
+  myChart.data.datasets[0].data = recentActivities.map(activity => Math.round(activity.calories));
 
   myChart.update();
 }
